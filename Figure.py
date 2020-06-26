@@ -11,22 +11,10 @@ class Figure:
         self.positions = shape['positions']
         self.rotation = rotation
         self.color = shape['color']
-    
-    def move_left(self):
-        if self.x > 0:
-            self.x -= 1
-    
-    def move_right(self):
-        if self.x < config.WIDTH - self.grid_size:
-            self.x += 1
 
     def rotate(self):
         self.rotation += 1
         self.rotation %= 4
-    
-    def fall(self):
-        if self.y < config.HEIGHT - self.grid_size:
-            self.y += 1
     
     def get_field(self):
         Field = [[0 for j in range(self.grid_size)] for i in range(self.grid_size)]
