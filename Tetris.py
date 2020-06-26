@@ -5,20 +5,22 @@ import config
 class Tetris:
     def __init__(self, score=0):
         self.score = score
+        self.counter = 0
         self.game_over = False
         self.figure = Figure()
         self.field = [[0 for j in range(config.WIDTH)] for i in range(config.HEIGHT)]
     
     def collides(self):
-        if self.figure.y < 0 or self.figure.y + self.figure.grid_size > config.HEIGHT:
-            return False
-        if self.figure.x < 0 or self.figure.x + self.figure.grid_size > config.WIDTH:
-            return False
         figure_field = self.figure.get_field()
-        for i in self.figure.grid_size:
-            for j in self.figure.grid_size:
-                if figure_field[i][j] and self.field[self.figure.y + i][self.figure.x + j]:
-                    return True
+        for i in range(self.figure.grid_size):
+            for j in range(self.figure.grid_size):
+                if figure_field[i][j]:
+                    if i + self.figure.y not in range(0, config.HEIGHT):
+                        return True
+                    if j + self.figure.x not in range(0, config.WIDTH):
+                        return True
+                    if self.field[self.figure.y + i][self.figure.x + j]:
+                        return True
         return False
     
     def new_figure(self):
@@ -26,8 +28,8 @@ class Tetris:
     
     def extend_field(self):
         figure_field = self.figure.get_field()
-        for i in self.figure.grid_size:
-            for j in self.figure.grid_size:
+        for i in range(self.figure.grid_size):
+            for j in range(self.figure.grid_size):
                 if figure_field[i][j]:
                     self.field[self.figure.y + i][self.figure.x + j] = figure_field[i][j]
     
@@ -49,9 +51,32 @@ class Tetris:
 
     def rotate(self):
         old_rotation = self.figure.rotation
+        old_x = self.figure.x
+        old_y = self.figure.y
         self.figure.rotate()
-        if self.collides():
-            self.figure.rotation = old_rotation
+        if not self.collides():
+            return
+        self.figure.x = old_x + 1
+        if not self.collides():
+            return
+        self.figure.x = old_x + 2
+        if not self.collides():
+            return
+        self.figure.x = old_x - 1
+        if not self.collides():
+            return
+        self.figure.x = old_x - 2
+        if not self.collides():
+            return
+        self.figure.x = old_x
+        self.figure.y = old_y + 1
+        if not self.collides():
+            return
+        self.figure.y = old_y - 1
+        if not self.collides():
+            return
+        self.figure.y = old_y
+        self.figure.rotation = old_rotation
     
     def break_lines(self):
         lines = 0
@@ -75,6 +100,7 @@ class Tetris:
             self.game_over = True
     
     def iteration(self, move):
+        self.counter += 1
         if self.game_over:
             return False
         if move == 'L':
@@ -85,4 +111,5 @@ class Tetris:
             self.rotate()
         if move == 'D':
             pass
-        self.fall()
+        if self.counter % (config.FPS // 5) == 0:
+            self.fall()
