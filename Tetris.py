@@ -1,4 +1,5 @@
 from Figure import Figure
+from collections import deque
 import config
 
 
@@ -9,6 +10,10 @@ class Tetris:
         self.game_over = False
         self.figure = Figure()
         self.field = [[0 for j in range(config.WIDTH)] for i in range(config.HEIGHT)]
+        self.query = deque([Figure(), Figure()])
+        while self.figure == self.query[0] == self.query[1]:
+            self.query.pop()
+            self.query.append(Figure())
     
     def collides(self):
         figure_field = self.figure.get_field()
@@ -24,7 +29,11 @@ class Tetris:
         return False
     
     def new_figure(self):
-        self.figure = Figure()
+        self.figure = self.query.popleft()
+        self.query.append(Figure())
+        while self.figure == self.query[0] == self.query[1]:
+            self.query.pop()
+            self.query.append(Figure())
     
     def extend_field(self):
         figure_field = self.figure.get_field()

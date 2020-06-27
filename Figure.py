@@ -21,3 +21,6 @@ class Figure:
         for block in self.positions[self.rotation]:
             Field[block // self.grid_size][block % self.grid_size] = self.color
         return Field
+    
+    def __eq__(self, other):
+        return self.positions == other.positions

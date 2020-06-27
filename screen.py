@@ -26,6 +26,8 @@ def draw(game):
                     config.BLOCK_SIZE, config.BLOCK_SIZE
                 ])
     field = game.figure.get_field()
+    X_END = config.WIDTH * config.BLOCK_SIZE + (config.WIDTH + 1) * config.LINE_WIDTH
+    Y_END = config.HEIGHT * config.BLOCK_SIZE + (config.HEIGHT + 1) * config.LINE_WIDTH
     for i in range(game.figure.grid_size):
         for j in range(game.figure.grid_size):
             if field[i][j]:
@@ -36,5 +38,24 @@ def draw(game):
                     Y * config.BLOCK_SIZE + (Y + 1) * config.LINE_WIDTH,
                     config.BLOCK_SIZE, config.BLOCK_SIZE
                 ])
+    pygame.draw.rect(win, GRAY, [
+        X_END,
+        0,
+        config.CROSS_LINE_WIDTH,
+        Y_END
+    ])
+    for n in range(2):
+        h = game.query[0].grid_size + 1
+        figure = game.query[n]
+        field = figure.get_field()
+        for i in range(figure.grid_size):
+            for j in range(figure.grid_size):
+                if field[i][j]:
+                    pygame.draw.rect(win, field[i][j], [
+                        X_END+config.CROSS_LINE_WIDTH+j*config.BLOCK_SIZE+(j+1)*config.LINE_WIDTH,
+                        (i + h * n) * config.BLOCK_SIZE + (i + h * n + 1) * config.LINE_WIDTH,
+                        config.BLOCK_SIZE, config.BLOCK_SIZE
+                    ])
+
     pygame.display.flip()
     clock.tick(config.FPS)
