@@ -9,6 +9,14 @@ WIN_SIZE = (
 )
 FPS = 10
 
+# Machine Learning
+ACTIONS = ['L', 'R', 'U', 'D']
+GAMMA = 0.95
+EPSILON = 1.0
+EPSILON_DECAY = 0.995
+EPSILON_MIN = 0.001
+LEARNING_RATE = 0.001
+
 FIGURE_SHAPES = [
     {
         "grid_size": 3,
