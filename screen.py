@@ -11,7 +11,7 @@ clock = pygame.time.Clock()
 win = pygame.display.set_mode(config.WIN_SIZE)
 pygame.display.set_caption('Tetris')
 
-def draw(game):
+def draw(game, tick=True):
     if (game.game_over):
         pygame.display.set_caption(f'GAME OVER. SCORE: {game.score}')
     else:
@@ -58,4 +58,5 @@ def draw(game):
                     ])
 
     pygame.display.flip()
-    clock.tick(config.FPS)
+    if tick:
+        clock.tick(config.FPS)

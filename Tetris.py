@@ -16,6 +16,9 @@ class Tetris:
             self.query.pop()
             self.query.append(Figure())
     
+    def reset(self):
+        self.__init__()
+    
     def collides(self):
         figure_field = self.figure.get_field()
         for i in range(self.figure.grid_size):
@@ -135,5 +138,4 @@ class Tetris:
             for j in range(self.figure.grid_size):
                 if field[i][j]:
                     X[self.figure.y + i][self.figure.x + j] = 1
-        print(X)
-        return X.reshape((config.HEIGHT, config.WIDTH, 1))
+        return X.reshape((1, config.HEIGHT, config.WIDTH, 1))

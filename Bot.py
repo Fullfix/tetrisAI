@@ -11,7 +11,7 @@ import config
 class Bot:
     def __init__(self):
         self.state_size = config.WIDTH * config.HEIGHT
-        self.memory = deque(maxlen=4000)
+        self.memory = deque(maxlen=2000)
         self.gamma = config.GAMMA
         self.epsilon = config.EPSILON
         self.epsilon_decay = config.EPSILON_DECAY
@@ -33,11 +33,11 @@ class Bot:
         return model
     
     def remember(self, state, action, reward, next_state, done):
-        self.memory.append(state, action, reward, next_state, done)
+        self.memory.append([state, action, reward, next_state, done])
     
     def act(self, state):
         if np.random.rand() <= self.epsilon:
-            return random.choice(config.ACTIONS)
+            return random.choice(range(len(config.ACTIONS)))
         values = self.model.predict(state)
         return np.argmax(values[0])
     
@@ -49,7 +49,7 @@ class Bot:
             if not done:
                 target = (reward + self.gamma * np.amax(self.model.predict(next_state)[0]))
             target_f = self.model.predict(state)
-            target[0][action] = target
+            target_f[0][action] = target
         
         self.model.fit(state, target_f, epochs=5, verbose=0)
 
