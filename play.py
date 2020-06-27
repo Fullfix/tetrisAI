@@ -21,4 +21,5 @@ while running:
         if event.key == pygame.K_RIGHT:
             move = 'R'
     game.iteration(move)
+    game.get_state()
     screen.draw(game)
