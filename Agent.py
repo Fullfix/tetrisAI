@@ -11,7 +11,7 @@ class Agent:
         self.score = 0
         self.model = alg.build_model()
         if weights:
-            self.model.load_weights(weights)
+            self.model.set_weights(weights)
     
     def act(self, state):
         values = self.model.predict(state)

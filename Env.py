@@ -1,12 +1,13 @@
 from TetrisGenetic import TetrisGenetic
+from Agent import Agent
 import config
 import algorithm
 
 
 class Env:
-    def __init__(self, games=None):
-        if games:
-            self.games = games
+    def __init__(self, Weights=None):
+        if Weights:
+            self.games = [TetrisGenetic(Agent(weights)) for weights in Weights]
         else:
             self.games = [TetrisGenetic() for i in range(config.NUM_AGENTS)]
         self.over = False

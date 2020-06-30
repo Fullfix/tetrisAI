@@ -47,3 +47,35 @@ def generate_next_pop(env: Env):
     # set weights
     env.change_weights(newpopulation)
     env.reset()
+
+def save_scores(Scores: list):
+    with open('scores.txt', 'rb') as f:
+        S, E = pickle.load(f)
+    if E != 0:
+        S += Scores
+        E = len(S)
+    else:
+        E = len(Scores)
+        S = Scores
+    with open('scores.txt', 'wb') as f:
+        pickle.dump((S, E), f)
+
+def load_scores():
+    with open('scores.txt', 'rb') as f:
+        S, E = pickle.load(f)
+    return S, range(1, E+1)
+    
+
+def save_population(population: list, Scores: list):
+    Weights = list(map(lambda x: x.model.get_weights(), population))
+    with open('weights.txt', 'wb') as f:
+        pickle.dump(Weights, f)
+    save_scores(Scores)
+    print('saved')
+
+def load_population():
+    with open('weights.txt', 'rb') as f:
+        Weights = pickle.load(f)
+    env = Env(Weights)
+    print('loaded')
+    return env

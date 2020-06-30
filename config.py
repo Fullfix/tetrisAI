@@ -14,14 +14,18 @@ FPS = 10
 
 ### Machine Learning
 # Learning
+LOAD_WEIGHTS = False
+SHOW = True
+SAVE = True
+SAVE_EPOCHS = 10
 NUM_AGENTS = 10
 INDPB = 0.01
 MU = 0
 SIGMA = 0.1
 ALPHA = 0.1
-BEST_IND_NUM = 3
+BEST_IND_NUM = 2
 # Show
-EPOCHS = 100
+EPOCHS = 10
 SHOW = True
 TICK = True
 VERBOSE = 0
