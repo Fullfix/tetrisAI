@@ -14,6 +14,7 @@ FPS = 10
 
 ### Machine Learning
 # Learning
+NUM_AGENTS = 100
 INDPB = 0.01
 MU = 0
 SIGMA = 0.1
