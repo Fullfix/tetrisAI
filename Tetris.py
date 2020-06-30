@@ -2,6 +2,7 @@ from Figure import Figure
 from collections import deque
 import numpy as np
 import config
+import time
 
 
 class Tetris:
@@ -126,22 +127,3 @@ class Tetris:
             pass
         if self.counter % config.FALL_MOVES == 0:
             self.fall()
-    
-    def get_state(self):
-        X = np.zeros((config.HEIGHT, config.WIDTH))
-        for i in range(config.HEIGHT):
-            for j in range(config.WIDTH):
-                if self.field[i][j]:
-                    X[i, j] = 0.5
-        field = self.figure.get_field()
-        for i in range(self.figure.grid_size):
-            for j in range(self.figure.grid_size):
-                if field[i][j]:
-                    X[self.figure.y + i][self.figure.x + j] = 1
-        return X.reshape((1, config.HEIGHT, config.WIDTH, 1))
-    
-    def get_hight(self):
-        for i in range(config.HEIGHT):
-            if any(self.field[i]):
-                return config.HEIGHT - i - 1
-        return 0

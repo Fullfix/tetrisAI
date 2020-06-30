@@ -1,6 +1,7 @@
 import random
 import config
 import numpy as np
+import time
 import pickle
 import keras
 from deap.tools import cxTwoPoint, cxUniform, cxBlend, mutGaussian
@@ -9,7 +10,7 @@ from Agent import Agent
 from Env import Env
 
 def eval_agent(agent: Agent):
-    return agent.score + 0.01 * agent.totaltime
+    return agent.score + 0.005 * agent.totaltime
 
 def mutate(weights: list):
     for W in weights:
@@ -31,6 +32,7 @@ def get_avg_score(population: list):
 
 def generate_next_pop(env: Env):
     # choose best agents
+    t = time.time()
     population = env.get_population()
     bestpopulaton, middle, worst = choose_best(population, config.BEST_IND_NUM)
     # crossover middle

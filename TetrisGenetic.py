@@ -1,6 +1,7 @@
 from Tetris import Tetris
 from Agent import Agent
 import numpy as np
+import time
 import config
 
 
