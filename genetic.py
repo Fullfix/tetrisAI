@@ -32,7 +32,7 @@ def generate_next_pop(env: Env):
     bestpopulaton, middle, worst = choose_best(population, config.BEST_IND_NUM)
     # crossover middle
     for i in range(0, len(middle), 2):
-        middle[i], middle[i+1] = cxBlend(middle[i], middle[i+1], settings.ALPHA)
+        middle[i], middle[i+1] = cxBlend(middle[i], middle[i+1], config.ALPHA)
     newpopulation = bestpopulaton + middle + deepcopy(bestpopulaton)
     # mutate
     for weights in newpopulation:
