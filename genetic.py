@@ -19,7 +19,7 @@ def mutate(weights: list):
 
 def choose_best(population: list, n: int):
     l = config.NUM_AGENTS
-    sorted_pop = sorted(population, eval_agent, reverse=True)
+    sorted_pop = sorted(population, key=eval_agent, reverse=True)
     sorted_pop = [x.model.get_weights() for x in sorted_pop]
     return sorted_pop[:n], sorted_pop[n:l-n], sorted_pop[l-n:]
 

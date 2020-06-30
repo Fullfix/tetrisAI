@@ -1,5 +1,6 @@
 from TetrisGenetic import TetrisGenetic
 import config
+import algorithm
 
 
 class Env:
@@ -17,6 +18,7 @@ class Env:
     
     def change_weights(self, weights: list):
         for game, W in zip(self.games, weights):
+            game.agent.model = algorithm.build_model()
             game.agent.model.set_weights(W)
     
     def get_population(self):
@@ -27,6 +29,5 @@ class Env:
         for game in self.games:
             if not game.game_over:
                 game.play()
-                c += 1
         if c == 0:
             self.over = True
