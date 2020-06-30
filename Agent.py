@@ -7,6 +7,8 @@ from Tetris import Tetris
 
 class Agent:
     def __init__(self, weights=None):
+        self.totaltime = 0
+        self.score = 0
         self.model = alg.build_model()
         if weights:
             self.model.load_weights(weights)
@@ -14,9 +16,3 @@ class Agent:
     def act(self, state):
         values = self.model.predict(state)
         return config.ACTIONS[np.argmax(values[0])]
-    
-    def load(self, name):
-        self.model.load_weights(name)
-    
-    def save(self, name):
-        self.model.save_weights(name)

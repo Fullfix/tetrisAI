@@ -14,11 +14,11 @@ FPS = 10
 
 ### Machine Learning
 # Learning
-GAMMA = 0.95
-EPSILON = 1.0
-EPSILON_DECAY = 0.992
-EPSILON_MIN = 0.001
-LEARNING_RATE = 0.05
+INDPB = 0.01
+MU = 0
+SIGMA = 0.1
+ALPHA = 0.1
+BEST_IND_NUM = 1
 # Show
 EPOCHS = 1000
 SHOW = True
