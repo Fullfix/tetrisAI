@@ -139,3 +139,9 @@ class Tetris:
                 if field[i][j]:
                     X[self.figure.y + i][self.figure.x + j] = 1
         return X.reshape((1, config.HEIGHT, config.WIDTH, 1))
+    
+    def get_hight(self):
+        for i in range(config.HEIGHT):
+            if any(self.field[i]):
+                return config.HEIGHT - i - 1
+        return 0

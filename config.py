@@ -1,24 +1,31 @@
+### Tetris Config
 WIDTH = 10
 HEIGHT = 20
 BLOCK_SIZE = 40
 LINE_WIDTH = 5
 FALL_MOVES = 1
 CROSS_LINE_WIDTH = 10
+ACTIONS = ['L', 'R', 'U', 'D']
 WIN_SIZE = (
     (WIDTH + 3) * BLOCK_SIZE + LINE_WIDTH * (WIDTH + 6) + CROSS_LINE_WIDTH,
     HEIGHT * BLOCK_SIZE + LINE_WIDTH * (HEIGHT + 1)
 )
 FPS = 10
 
-# Machine Learning
-ACTIONS = ['L', 'R', 'U', 'D']
+### Machine Learning
+# Learning
 GAMMA = 0.95
 EPSILON = 1.0
-EPSILON_DECAY = 0.995
+EPSILON_DECAY = 0.992
 EPSILON_MIN = 0.001
-LEARNING_RATE = 0.001
-BATCH_SIZE = 64
+LEARNING_RATE = 0.05
+# Show
+EPOCHS = 1000
+SHOW = True
+TICK = True
+VERBOSE = 0
 
+### Tetris Figure Shapes
 FIGURE_SHAPES = [
     {
         "grid_size": 3,

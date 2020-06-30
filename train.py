@@ -1,7 +1,8 @@
 from Env import Env
+import config
 
-env = Env(show=True)
+env = Env()
 
-for e in range(10000):
-    env.play_epoch()
-    print(env.game.score, env.bot.epsilon)
+for e in range():
+    env.play_epoch(config.EPOCHS)
+    print(f'score={env.game.score}, eps={env.bot.epsilon}, epoch={e}')
