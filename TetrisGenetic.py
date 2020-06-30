@@ -33,3 +33,6 @@ class TetrisGenetic(Tetris):
                 if field[i][j]:
                     X[self.figure.y + i][self.figure.x + j] = 1
         return X.reshape((1, config.HEIGHT * config.WIDTH))
+    
+    def __repr__(self):
+        return f'TetrisGenetic score:{ self.score } totaltime: { self.counter }'

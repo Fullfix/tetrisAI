@@ -29,5 +29,6 @@ class Env:
         for game in self.games:
             if not game.game_over:
                 game.play()
+                c += 1
         if c == 0:
             self.over = True

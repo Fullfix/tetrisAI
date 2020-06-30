@@ -9,7 +9,7 @@ from Agent import Agent
 from Env import Env
 
 def eval_agent(agent: Agent):
-    return agent.score + 0.05 * agent.totaltime
+    return agent.score + 0.01 * agent.totaltime
 
 def mutate(weights: list):
     for W in weights:
@@ -23,8 +23,11 @@ def choose_best(population: list, n: int):
     sorted_pop = [x.model.get_weights() for x in sorted_pop]
     return sorted_pop[:n], sorted_pop[n:l-n], sorted_pop[l-n:]
 
-def get_avg_time(population: list):
-    return sum(list(map(lambda x: x.totaltime, population))) / len(population)
+def get_avg_res(population: list):
+    return sum(list(map(eval_agent, population))) / len(population)
+
+def get_avg_score(population: list):
+    return sum(list(map(lambda x: x.score, population))) / len(population)
 
 def generate_next_pop(env: Env):
     # choose best agents
